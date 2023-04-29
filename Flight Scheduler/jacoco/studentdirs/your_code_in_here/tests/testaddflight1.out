@@ -1,0 +1,14 @@
+User: Successfully added location Perth.
+
+User: Invalid ending location.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+(None)
+
+User: Locations (1):
+Perth
+
+User: Application closed.

@@ -1,0 +1,15 @@
+User: Successfully added location Sydney.
+
+User: This location already exists.
+
+User: Location:    Sydney
+Latitude:    -33.870000
+Longitude:   150.600000
+Demand:      +0.5000
+
+User: Invalid location name.
+
+User: Locations (1):
+Sydney
+
+User: Application closed.

@@ -1,0 +1,6 @@
+location import locations.csv
+flight add sunday 23:50 sydney perth 180
+flight add monday 00:30 perth sydney 180
+flights
+exit
+

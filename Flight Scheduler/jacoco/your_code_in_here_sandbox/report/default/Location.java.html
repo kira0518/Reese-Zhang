@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Location.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Location.java</span></div><h1>Location.java</h1><pre class="source lang-java linenums">import java.util.*;
+import java.lang.*;
+
+public class Location {
+
+	public String name;
+	public double lat;
+	public double lon;
+	public double demand;
+	//private static final int R = 6371;
+<span class="fc" id="L11">	public ArrayList&lt;Flight&gt; Departure = new ArrayList&lt;Flight&gt;();</span>
+<span class="fc" id="L12">	public ArrayList&lt;Flight&gt; Arrival = new ArrayList&lt;Flight&gt;();</span>
+<span class="fc" id="L13">	public ArrayList&lt;Integer&gt; aftertime = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L14">	public ArrayList&lt;Integer&gt; beforetime = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L15">	public ArrayList&lt;Integer&gt; conflicttime = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L16">	public ArrayList&lt;Integer&gt; beforeconflict_time = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L17">	public ArrayList&lt;Integer&gt; afterconflict_time = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L18">	public HashMap&lt;Integer, Flight&gt; conflict_flights = new HashMap&lt;Integer, Flight&gt;();</span>
+	public double latitude_1;
+	public double latitude_2;
+	public double longitude_1;
+	public double longitude_2;
+	public double direct_lat;
+	public double direct_lon;
+	public double rad_lat;
+	public double rad_lat1;
+	public double rad_lat2;
+	public double rad_lon;
+	public double h;
+	public double d;
+	public double distanse;
+	public String f_time;
+	public String dep_time;
+	public String z;
+	public int dist;
+	public int t_dif;
+<span class="fc" id="L37">	public boolean no_conflit = false;</span>
+	public String arr_dtime;
+	public int flight_time;
+	public int d_t;
+	public int d_time;
+	public int time_dif;
+	public String con_strname;
+	public int arr_dt;
+	public int arr_t;
+	public Flight conflict_flight;
+	public int con_name;
+	public String msg;
+	public int f_t;
+	
+
+<span class="fc" id="L52">	public Location(String name, double lat, double lon, double demand) {</span>
+<span class="fc" id="L53">		this.name = name;</span>
+<span class="fc" id="L54">		this.lat = lat;</span>
+<span class="fc" id="L55">		this.lon = lon;</span>
+<span class="fc" id="L56">		this.demand = demand;</span>
+		
+
+<span class="fc" id="L59">	}</span>
+
+    //Implement the Haversine formula - return value in kilometres
+    public static double distance(Location l1, Location l2) {
+<span class="fc" id="L63">		double latitude_1 = l1.lat;</span>
+<span class="fc" id="L64">		double longitude_1 = l1.lon;</span>
+<span class="fc" id="L65">		double latitude_2 = l2.lat;</span>
+<span class="fc" id="L66">		double longitude_2 = l2.lon;</span>
+<span class="fc" id="L67">		double direct_lat = latitude_2 - latitude_1;</span>
+<span class="fc" id="L68">		double direct_lon = longitude_2 - longitude_1;</span>
+<span class="fc" id="L69">		double rad_lat = direct_lat * Math.PI / 180;</span>
+<span class="fc" id="L70">		double rad_lon = direct_lon * Math.PI / 180;</span>
+<span class="fc" id="L71">		double rad_lat1 = latitude_1 * Math.PI / 180;</span>
+<span class="fc" id="L72">		double rad_lat2 = latitude_2 * Math.PI / 180;</span>
+<span class="fc" id="L73">		double h = Math.pow(Math.sin(rad_lat / 2), 2) </span>
+<span class="fc" id="L74">				+  Math.cos(rad_lat1) * Math.cos(rad_lat2) *</span>
+<span class="fc" id="L75">				   Math.pow(Math.sin(rad_lon / 2), 2);</span>
+<span class="fc" id="L76">		double d = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));</span>
+<span class="fc" id="L77">		double distanse = d * 6371;</span>
+		//int dist = (int)Math.round(distanse);
+<span class="fc" id="L79">		return distanse;</span>
+		
+
+				
+    }
+
+    public void addArrival(Flight f) {
+<span class="fc" id="L86">		Departure.add(f);</span>
+<span class="fc" id="L87">	}</span>
+	
+	public void addDeparture(Flight f) {
+<span class="fc" id="L90">		Arrival.add(f);</span>
+
+<span class="fc" id="L92">	}</span>
+	
+
+
+	/**
+	 * Check to see if Flight f can depart from this location.
+	 * If there is a clash, the clashing flight string is returned, otherwise null is returned.
+	 * A conflict is determined by if any other flights are arriving or departing at this location within an hour of this flight's departure time.
+	 * @param f The flight to check.
+	 * @return &quot;Flight &lt;id&gt; [departing/arriving] from &lt;name&gt; on &lt;clashingFlightTime&gt;&quot;. Return null if there is no clash.
+	 */
+	public String hasRunwayDepartureSpace(Flight f) {
+		//check departures first
+
+		//then check arrivals
+<span class="fc" id="L107">		String f_time = f.datetime;</span>
+<span class="fc" id="L108">		int f_t = Flight.find_time(f_time);</span>
+		
+<span class="fc bfc" id="L110" title="All 2 branches covered.">		for (int i = 0; i &lt; Departure.size(); i ++)</span>
+		{
+<span class="fc" id="L112">			String dep_time = Departure.get(i).datetime;</span>
+<span class="fc" id="L113">			int dep_t = Flight.find_time(dep_time);	</span>
+<span class="fc" id="L114">			int time_dif =  f_t - dep_t;</span>
+			
+<span class="fc bfc" id="L116" title="All 2 branches covered.">			if (time_dif &gt;= 5760)</span>
+			{
+<span class="fc" id="L118">				int week_time = 10080 - time_dif;</span>
+				
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L122">					aftertime.add(week_time);</span>
+<span class="nc" id="L123">					conflict_flights.put(week_time, Departure.get(i));</span>
+				}
+				
+<span class="fc bfc" id="L126" title="All 2 branches covered.">			}else if (time_dif &lt; -5760)</span>
+			{
+<span class="fc" id="L128">				int week_time = 10080 + time_dif;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">				if (week_time &lt; 60)</span>
+				{
+<span class="fc" id="L131">					beforetime.add(week_time);</span>
+<span class="fc" id="L132">					conflict_flights.put(week_time, Departure.get(i));</span>
+				}
+				
+
+			}
+<span class="fc" id="L137">			int time_diff = Math.abs(time_dif);</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">			if (time_diff &lt; 60)</span>
+			{
+<span class="fc bfc" id="L140" title="All 2 branches covered.">				if (time_dif &lt; 0) </span>
+				{	
+<span class="fc" id="L142">					aftertime.add(time_diff);</span>
+<span class="fc" id="L143">					conflict_flights.put(time_diff, Departure.get(i));</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">				}else if (time_dif &gt;= 0)</span>
+					{
+					//System.out.println(time_diff);
+<span class="fc" id="L147">					beforetime.add(time_diff);</span>
+<span class="fc" id="L148">					conflict_flights.put(time_diff, Departure.get(i));</span>
+					}
+			}
+			
+
+		}
+		
+	
+		
+<span class="fc bfc" id="L157" title="All 2 branches covered.">		if (aftertime.size() &gt; 0)</span>
+		{
+<span class="fc" id="L159">			Collections.sort(aftertime);</span>
+<span class="fc" id="L160">			Flight conflict_flight = conflict_flights.get(aftertime.get(0));</span>
+<span class="fc" id="L161">			int con_name = conflict_flight.Id;</span>
+<span class="fc" id="L162">			String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; departing from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="fc" id="L163">			conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="fc" id="L164">			return msg;</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">		}else if (aftertime.size() == 0)</span>
+		{
+<span class="fc bfc" id="L167" title="All 2 branches covered.">			if (beforetime.size() &gt; 0)</span>
+			{
+<span class="fc" id="L169">				Collections.sort(beforetime);</span>
+<span class="fc" id="L170">				Flight conflict_flight = conflict_flights.get(beforetime.get(0));</span>
+<span class="fc" id="L171">				String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; departing from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="fc" id="L172">				conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="fc" id="L173">				return msg;</span>
+			}
+		}
+		
+
+		
+<span class="fc" id="L179">		beforetime.clear();</span>
+<span class="fc" id="L180">		aftertime.clear();</span>
+
+<span class="fc bfc" id="L182" title="All 2 branches covered.">		for (int i = 0; i &lt; Arrival.size(); i ++)</span>
+		{
+<span class="fc" id="L184">			String arr_dtime = Arrival.get(i).datetime;</span>
+<span class="fc" id="L185">			Flight flight_i = Arrival.get(i);</span>
+<span class="fc" id="L186">			int flight_time = Arrival.get(i).getDuration();</span>
+<span class="fc" id="L187">			int arr_dt = Flight.find_time(arr_dtime);</span>
+<span class="fc" id="L188">			int arr_t = flight_time + arr_dt;</span>
+			//System.out.println(arr_dt);
+			//System.out.println(f_t);
+<span class="fc" id="L191">			int t_dif = f_t - arr_t;</span>
+<span class="fc" id="L192">			int time_diff = Math.abs(t_dif);</span>
+			
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">			if (time_dif &gt;= 5760)</span>
+			{
+<span class="nc" id="L196">				int week_time = 10080 - time_dif;</span>
+				
+<span class="nc bnc" id="L198" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L200">					aftertime.add(week_time);</span>
+<span class="nc" id="L201">					conflict_flights.put(week_time, Arrival.get(i));</span>
+				}
+				
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">			}else if (time_dif &lt; -5760)</span>
+			{
+<span class="nc" id="L206">				int week_time = 10080 + time_dif;</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L209">					beforetime.add(week_time);</span>
+<span class="nc" id="L210">					conflict_flights.put(week_time, Arrival.get(i));</span>
+				}
+				
+
+			}
+
+<span class="fc bfc" id="L216" title="All 2 branches covered.">			if (time_diff &lt; 60)</span>
+			{
+<span class="fc bfc" id="L218" title="All 2 branches covered.">				if (t_dif &lt; 0) </span>
+				{
+<span class="fc" id="L220">					aftertime.add(time_diff);</span>
+<span class="fc" id="L221">					conflict_flights.put(time_diff, Arrival.get(i));</span>
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">				}else if (t_dif &gt;= 0)</span>
+				{
+<span class="fc" id="L224">					beforetime.add(time_diff);</span>
+<span class="fc" id="L225">					conflict_flights.put(time_diff, Arrival.get(i));</span>
+				}
+			}
+			
+		}
+		
+		
+		//System.out.println(time_dif);
+
+<span class="fc bfc" id="L234" title="All 2 branches covered.">		if (aftertime.size() &gt; 0)</span>
+		{
+<span class="fc" id="L236">			Collections.sort(aftertime);</span>
+<span class="fc" id="L237">			Flight conflict_flight = conflict_flights.get(aftertime.get(0));</span>
+<span class="fc" id="L238">			int con_name = conflict_flight.Id;</span>
+<span class="fc" id="L239">			String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; arriving from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="fc" id="L240">			conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="fc" id="L241">			return msg;</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">		}else if (aftertime.size() == 0)</span>
+		{
+<span class="fc bfc" id="L244" title="All 2 branches covered.">			if (beforetime.size() &gt; 0)</span>
+			{
+<span class="fc" id="L246">				Collections.sort(beforetime);</span>
+<span class="fc" id="L247">				Flight conflict_flight = conflict_flights.get(beforetime.get(0));</span>
+<span class="fc" id="L248">				String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; arriving from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="fc" id="L249">				conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="fc" id="L250">				return msg;</span>
+			}
+		}
+
+
+<span class="fc" id="L255">		return null;</span>
+
+    }
+
+
+
+    /**
+	 * Check to see if Flight f can arrive at this location.
+	 * A conflict is determined by if any other flights are arriving or departing at this location within an hour of this flight's arrival time.
+	 * @param f The flight to check.
+	 * @return String representing the clashing flight, or null if there is no clash. Eg. &quot;Flight &lt;id&gt; [departing/arriving] from &lt;name&gt; on &lt;clashingFlightTime&gt;&quot;
+	 */
+	public String hasRunwayArrivalSpace(Flight f) {
+		//check departures first
+		//then check arrivals
+<span class="nc" id="L270">		String d_time = f.datetime;</span>
+<span class="nc" id="L271">		int f_dura = f.getDuration();</span>
+<span class="nc" id="L272">		int d_t = Flight.find_time(d_time);</span>
+<span class="nc" id="L273">		int f_t = d_t + f_dura;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">		for (int i = 0; i &lt; Departure.size(); i ++)</span>
+		{
+<span class="nc" id="L276">			String dep_time = Departure.get(i).datetime;</span>
+<span class="nc" id="L277">			int dep_t = Flight.find_time(dep_time);	</span>
+<span class="nc" id="L278">			int time_dif =  f_t - dep_t;</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">			if (time_dif &gt;= 5760)</span>
+			{
+<span class="nc" id="L281">				int week_time = 10080 - time_dif;</span>
+				
+<span class="nc bnc" id="L283" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L285">					aftertime.add(week_time);</span>
+<span class="nc" id="L286">					conflict_flights.put(week_time, Departure.get(i));</span>
+				}
+				
+<span class="nc bnc" id="L289" title="All 2 branches missed.">			}else if (time_dif &lt; -5760)</span>
+			{
+<span class="nc" id="L291">				int week_time = 10080 + time_dif;</span>
+				//System.out.println(week_time);
+<span class="nc bnc" id="L293" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L295">					beforetime.add(week_time);</span>
+<span class="nc" id="L296">					conflict_flights.put(week_time, Departure.get(i));</span>
+				}
+				
+
+			}
+<span class="nc" id="L301">			int time_diff = Math.abs(time_dif);</span>
+			
+<span class="nc bnc" id="L303" title="All 2 branches missed.">			if (time_diff &lt; 60)</span>
+			{
+<span class="nc bnc" id="L305" title="All 2 branches missed.">				if (time_dif &lt; 0) </span>
+				{	
+<span class="nc" id="L307">					aftertime.add(time_diff);</span>
+<span class="nc" id="L308">					conflict_flights.put(time_diff, Departure.get(i));</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">				}else if (time_dif &gt;= 0)</span>
+					{
+					//System.out.println(time_diff);
+<span class="nc" id="L312">					beforetime.add(time_diff);</span>
+<span class="nc" id="L313">					conflict_flights.put(time_diff, Departure.get(i));</span>
+					}
+			}
+			
+
+		}
+		
+	
+		
+<span class="nc bnc" id="L322" title="All 2 branches missed.">		if (aftertime.size() &gt; 0)</span>
+		{
+<span class="nc" id="L324">			Collections.sort(aftertime);</span>
+<span class="nc" id="L325">			Flight conflict_flight = conflict_flights.get(aftertime.get(0));</span>
+<span class="nc" id="L326">			int con_name = conflict_flight.Id;</span>
+<span class="nc" id="L327">			String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; departing from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="nc" id="L328">			conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="nc" id="L329">			return msg;</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">		}else if (aftertime.size() == 0)</span>
+		{
+<span class="nc bnc" id="L332" title="All 2 branches missed.">			if (beforetime.size() &gt; 0)</span>
+			{
+<span class="nc" id="L334">				Collections.sort(beforetime);</span>
+<span class="nc" id="L335">				Flight conflict_flight = conflict_flights.get(beforetime.get(0));</span>
+<span class="nc" id="L336">				String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; departing from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="nc" id="L337">				conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="nc" id="L338">				return msg;</span>
+			}
+		}
+		
+
+		
+<span class="nc" id="L344">		beforetime.clear();</span>
+<span class="nc" id="L345">		aftertime.clear();</span>
+
+<span class="nc bnc" id="L347" title="All 2 branches missed.">		for (int i = 0; i &lt; Arrival.size(); i ++)</span>
+		{
+<span class="nc" id="L349">			String arr_dtime = Arrival.get(i).datetime;</span>
+<span class="nc" id="L350">			Flight flight_i = Arrival.get(i);</span>
+<span class="nc" id="L351">			int flight_time = Arrival.get(i).getDuration();</span>
+<span class="nc" id="L352">			int arr_dt = Flight.find_time(arr_dtime);</span>
+<span class="nc" id="L353">			int arr_t = flight_time + arr_dt;</span>
+			// System.out.println(arr_dt);
+			// System.out.println(f_t);
+<span class="nc" id="L356">			int t_dif = f_t - arr_t;</span>
+<span class="nc" id="L357">			int time_diff = Math.abs(t_dif);</span>
+<span class="nc bnc" id="L358" title="All 2 branches missed.">			if (t_dif &gt;= 5760)</span>
+			{
+<span class="nc" id="L360">				int week_time = 10080 - t_dif;</span>
+				
+<span class="nc bnc" id="L362" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L364">					aftertime.add(week_time);</span>
+<span class="nc" id="L365">					conflict_flights.put(week_time, Arrival.get(i));</span>
+				}
+				
+<span class="nc bnc" id="L368" title="All 2 branches missed.">			}else if (t_dif &lt; -5760)</span>
+			{
+<span class="nc" id="L370">				int week_time = 10080 + t_dif;</span>
+				
+<span class="nc bnc" id="L372" title="All 2 branches missed.">				if (week_time &lt; 60)</span>
+				{
+<span class="nc" id="L374">					beforetime.add(week_time);</span>
+<span class="nc" id="L375">					conflict_flights.put(week_time, Arrival.get(i));</span>
+				}
+				
+
+			}
+
+<span class="nc bnc" id="L381" title="All 2 branches missed.">			if (time_diff &lt; 60)</span>
+			{
+<span class="nc bnc" id="L383" title="All 2 branches missed.">				if (t_dif &lt; 0) </span>
+				{
+<span class="nc" id="L385">					aftertime.add(time_diff);</span>
+<span class="nc" id="L386">					conflict_flights.put(time_diff, Arrival.get(i));</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">				}else if (t_dif &gt;= 0)</span>
+				{
+<span class="nc" id="L389">					beforetime.add(time_diff);</span>
+<span class="nc" id="L390">					conflict_flights.put(time_diff, Arrival.get(i));</span>
+				}
+			}
+			
+		}
+		
+		
+
+<span class="nc bnc" id="L398" title="All 2 branches missed.">		if (aftertime.size() &gt; 0)</span>
+		{
+<span class="nc" id="L400">			Collections.sort(aftertime);</span>
+<span class="nc" id="L401">			Flight conflict_flight = conflict_flights.get(aftertime.get(0));</span>
+<span class="nc" id="L402">			int con_name = conflict_flight.Id;</span>
+<span class="nc" id="L403">			String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; arriving from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="nc" id="L404">			conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="nc" id="L405">			return msg;</span>
+<span class="nc bnc" id="L406" title="All 2 branches missed.">		}else if (aftertime.size() == 0)</span>
+		{
+<span class="nc bnc" id="L408" title="All 2 branches missed.">			if (beforetime.size() &gt; 0)</span>
+			{
+<span class="nc" id="L410">				Collections.sort(beforetime);</span>
+<span class="nc" id="L411">				Flight conflict_flight = conflict_flights.get(beforetime.get(0));</span>
+<span class="nc" id="L412">				String msg = &quot;Flight &quot;+conflict_flight.Id+&quot; arriving from &quot;+conflict_flight.dep.name+&quot; on &quot;+conflict_flight.datetime.substring(0, 1).toUpperCase() + </span>
+<span class="nc" id="L413">				conflict_flight.datetime.substring(1)+&quot;.&quot;;</span>
+<span class="nc" id="L414">				return msg;</span>
+			}
+		}
+
+<span class="nc" id="L418">		return null;</span>
+
+    }
+
+		
+
+	
+	public static void main(String[] args){
+<span class="nc" id="L426">        Location Sydney = new Location(&quot;Sydney&quot;, -33.847927, 150.651786, 0.4);</span>
+<span class="nc" id="L427">		Location NewYork = new Location(&quot;NewYork&quot;, 40.7, -74.26, -0.874);</span>
+<span class="nc" id="L428">        Location Berlin = new Location(&quot;Berlin&quot;, 52.5, 13.15, 0.22222);</span>
+<span class="nc" id="L429">        Location perth = new Location(&quot;perth&quot;, -32.0397559, 115.681346, 0.5);</span>
+<span class="nc" id="L430">        Location London = new Location(&quot;London&quot;, 51.5285582, -0.2416812, 0.1);</span>
+<span class="nc" id="L431">        Location AliceSprings = new Location(&quot;AliceSprings&quot;, -23.7206896, 133.7977352, 0.056);</span>
+<span class="nc" id="L432">		Location Mumbai = new Location(&quot;Mumbai&quot;, 19.08, 72.741, 0.4);</span>
+<span class="nc" id="L433">        Location NewDelhi = new Location(&quot;NewDelhi&quot;, 28.527, 77.0688988, -0.123);</span>
+<span class="nc" id="L434">		Flight newflight1 = new Flight(1, &quot;monday 08:00&quot;, Mumbai, NewDelhi, 120);</span>
+<span class="nc" id="L435">		Flight newflight2 = new Flight(2, &quot;wednesday 03:15&quot;, Berlin, NewYork, 280);</span>
+<span class="nc" id="L436">		Flight newflight3 = new Flight(3, &quot;wednesday 06:00&quot;, Sydney, perth, 280);</span>
+<span class="nc" id="L437">		Flight newflight4 = new Flight(4, &quot;sunday 23:45&quot;, London, Berlin, 280);</span>
+<span class="nc" id="L438">		Flight newflight5 = new Flight(5, &quot;wednesday 01:20&quot;, perth, Sydney, 120);</span>
+<span class="nc" id="L439">	    Sydney.addDeparture(newflight3);</span>
+<span class="nc" id="L440">		perth.addArrival(newflight3);</span>
+<span class="nc" id="L441">		String a = Sydney.hasRunwayArrivalSpace(newflight5);</span>
+		
+
+
+<span class="nc" id="L445">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

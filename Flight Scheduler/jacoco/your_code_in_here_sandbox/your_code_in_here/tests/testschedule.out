@@ -1,0 +1,25 @@
+User: Imported 51 locations.
+
+User: Imported 70 flights.
+112 lines were invalid.
+
+User: This location does not exist in the system.
+
+User: Sydney
+-------------------------------------------------------
+ID   Time        Departure/Arrival to/from Location
+-------------------------------------------------------
+   0 Wed 21:25   Arrival from Sydney
+   5 Thu 02:44   Arrival from Sydney
+  33 Tue 21:47   Arrival from Sydney
+  39 Mon 20:27   Arrival from Sydney
+  40 Mon 22:57   Arrival from Sydney
+  47 Mon 19:35   Arrival from Sydney
+  48 Sat 13:31   Arrival from Sydney
+  49 Sat 08:31   Arrival from Sydney
+  50 Sat 10:31   Arrival from Sydney
+  51 Fri 17:29   Arrival from Sydney
+   3 Thu 00:25   Departure to Sydney
+   6 Wed 12:00   Departure to Sydney
+
+User: Application closed.

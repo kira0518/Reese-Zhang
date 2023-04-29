@@ -1,0 +1,18 @@
+User: Imported 51 locations.
+
+User: Imported 70 flights.
+112 lines were invalid.
+
+User: Usage:
+LOCATION <name>
+LOCATION ADD <name> <latitude> <longitude> <demand_coefficient>
+LOCATION IMPORT/EXPORT <filename>
+
+User: Invalid location name.
+
+User: Location:    Sydney
+Latitude:    -33.847927
+Longitude:   150.651786
+Demand:      +0.4000
+
+User: Application closed.

@@ -1,0 +1,25 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Successfully added Flight 1.
+
+User: Invalid departure time. Use the format <day_of_week> <hour:minute>, with 24h time.
+
+User: Invalid departure time. Use the format <day_of_week> <hour:minute>, with 24h time.
+
+User: Successfully added Flight 2.
+
+User: Scheduling conflict! This flight clashes with Flight 0 departing from Sydney on Sunday 23:50.
+
+User: Invalid Flight ID.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   1 Mon 04:30   Mon 09:01   Perth --> Sydney
+   2 Sun 19:10   Sun 23:41   Perth --> Sydney
+   0 Sun 23:50   Mon 04:21   Sydney --> Perth
+
+User: Application closed.

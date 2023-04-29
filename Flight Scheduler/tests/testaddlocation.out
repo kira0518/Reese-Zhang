@@ -1,0 +1,22 @@
+User: Successfully added location Sydney.
+
+User: Successfully added location Brisbane.
+
+User: Successfully added location Dubbo.
+
+User: Location:    Sydney
+Latitude:    -33.847927
+Longitude:   150.651786
+Demand:      +0.4000
+
+User: Location:    Brisbane
+Latitude:    -27.473282
+Longitude:   152.747337
+Demand:      +0.3000
+
+User: Location:    Dubbo
+Latitude:    -32.281102
+Longitude:   148.324133
+Demand:      -0.5000
+
+User: Application closed.

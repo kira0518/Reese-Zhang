@@ -1,0 +1,17 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Successfully added Flight 1.
+
+User: Successfully added Flight 2.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   0 Mon 00:44   Mon 09:36   Berlin --> NewYork
+   2 Wed 00:30   Wed 05:01   Perth --> Sydney
+   1 Wed 06:00   Wed 10:31   Sydney --> Perth
+
+User: Application closed.

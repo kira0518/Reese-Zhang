@@ -1,0 +1,41 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Successfully added Flight 1.
+
+User: Successfully added Flight 2.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   0 Mon 00:44   Mon 09:36   Berlin --> NewYork
+   1 Wed 06:00   Wed 10:31   Sydney --> Perth
+   2 Wed 10:00   Wed 14:12   Hobart --> Perth
+
+User: Flight 1
+Departure:    Wed 06:00 Sydney
+Arrival:      Wed 10:31 Perth
+Distance:     3,254km
+Duration:     4h 31m
+Ticket Cost:  $989.16
+Passengers:   0/180
+
+User: Flight 2
+Departure:    Wed 10:00 Hobart
+Arrival:      Wed 14:12 Perth
+Distance:     3,019km
+Duration:     4h 12m
+Ticket Cost:  $905.62
+Passengers:   0/180
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   0 Mon 00:44   Mon 09:36   Berlin --> NewYork
+   1 Wed 06:00   Wed 10:31   Sydney --> Perth
+   2 Wed 10:00   Wed 14:12   Hobart --> Perth
+
+User: Application closed.

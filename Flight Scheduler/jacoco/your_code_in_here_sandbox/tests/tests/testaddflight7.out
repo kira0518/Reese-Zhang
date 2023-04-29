@@ -1,0 +1,13 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Scheduling conflict! This flight clashes with Flight 0 departing from Sydney on Sunday 23:50.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   0 Sun 23:50   Mon 04:21   Sydney --> Perth
+
+User: Application closed.

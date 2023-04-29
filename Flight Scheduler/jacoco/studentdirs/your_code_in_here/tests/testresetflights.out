@@ -1,0 +1,32 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Successfully added Flight 1.
+
+User: Successfully added Flight 2.
+
+User: Booked 20 passengers on flight 1 for a total cost of $19365.60
+
+User: Booked 160 passengers on flight 1 for a total cost of $132075.16
+Flight is now full.
+
+User: Flight 1
+Departure:    Wed 06:00 Sydney
+Arrival:      Wed 10:31 Perth
+Distance:     3,254km
+Duration:     4h 31m
+Ticket Cost:  $791.33
+Passengers:   180/180
+
+User: Reset passengers booked to 0 for Flight 1, wednesday 6:00 Sydney --> Perth.
+
+User: Flight 1
+Departure:    Wed 06:00 Sydney
+Arrival:      Wed 10:31 Perth
+Distance:     3,254km
+Duration:     4h 31m
+Ticket Cost:  $989.16
+Passengers:   0/180
+
+User: Application closed.

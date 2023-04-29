@@ -1,0 +1,15 @@
+User: Usage:
+LOCATION <name>
+LOCATION ADD <name> <latitude> <longitude> <demand_coefficient>
+LOCATION IMPORT/EXPORT <filename>
+
+User: Successfully added location Dubbo.
+
+User: Location:    Dubbo
+Latitude:    -32.281102
+Longitude:   148.324133
+Demand:      +0.4000
+
+User: Invalid location name.
+
+User: Application closed.

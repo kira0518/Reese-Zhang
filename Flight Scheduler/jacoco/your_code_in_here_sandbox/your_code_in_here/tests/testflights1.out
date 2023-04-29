@@ -1,0 +1,84 @@
+User: Imported 51 locations.
+
+User: Imported 70 flights.
+112 lines were invalid.
+
+User: Locations (51):
+AbuDhabi, Adelaide, AliceSprings, Alta, Athens, Auckland, Beijing, Berlin, Bern, Bordeaux, Brisbane, Cairo, Cardiff, Chicago, CoffsHarbour, Dallas, Darwin, Dubai, Dubbo, GoldCoast, Hanoi, Hobart, Houston, Jakarta, Johannesburg, Lagos, Liverpool, London, Longyearbyen, LosAngeles, Luton, Madrid, Manchester, Moscow, NewYork, Orange, Oslo, Paris, Perth, Rio, Rome, SanFrancisco, Stockholm, Sydney, Toulouse, Townsville, Tromso, Ufa, Utqiagvik, Vladivostok, Washington
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+  57 Mon 00:00   Mon 10:02   Johannesburg --> Rio
+  57 Mon 00:00   Mon 10:02   Johannesburg --> Rio
+  32 Mon 09:00   Mon 10:36   Chicago --> NewYork
+  63 Mon 10:30   Mon 12:53   Dubbo --> AliceSprings
+  64 Mon 11:33   Mon 14:05   Orange --> AliceSprings
+  47 Mon 12:00   Mon 19:35   Sydney --> Jakarta
+  22 Mon 14:00   Mon 22:12   London --> Washington
+  59 Mon 14:32   Tue 00:34   Johannesburg --> Rio
+  65 Mon 15:05   Mon 17:52   AliceSprings --> Perth
+  66 Mon 16:05   Mon 18:52   Perth --> AliceSprings
+  41 Mon 18:00   Tue 11:07   Auckland --> Rio
+  21 Mon 19:00   Tue 03:12   London --> Washington
+  21 Mon 19:00   Tue 03:12   London --> Washington
+  56 Mon 21:00   Tue 01:12   Jakarta --> Hanoi
+  40 Mon 21:30   Mon 22:57   Sydney --> Hobart
+  45 Mon 22:00   Tue 14:02   Brisbane --> LosAngeles
+  44 Mon 23:00   Tue 16:07   Rio --> Auckland
+  44 Mon 23:00   Tue 16:07   Rio --> Auckland
+  30 Tue 00:00   Tue 01:43   Cardiff --> Madrid
+  28 Tue 01:00   Tue 02:28   Rome --> Athens
+  36 Tue 02:00   Tue 03:40   Moscow --> Ufa
+  25 Tue 04:00   Tue 06:03   Rome --> Luton
+  25 Tue 04:00   Tue 06:03   Rome --> Luton
+  26 Tue 05:00   Tue 08:21   Stockholm --> Athens
+  26 Tue 05:00   Tue 08:21   Stockholm --> Athens
+  42 Tue 06:00   Tue 19:58   Rio --> LosAngeles
+  31 Tue 09:00   Tue 12:18   Madrid --> Athens
+  37 Tue 10:00   Tue 11:40   Moscow --> Ufa
+  37 Tue 10:00   Tue 11:40   Moscow --> Ufa
+  24 Tue 12:00   Tue 13:12   Paris --> Berlin
+  24 Tue 12:00   Tue 13:12   Paris --> Berlin
+  38 Tue 13:40   Tue 21:11   Ufa --> Vladivostok
+  23 Tue 18:00   Tue 18:36   Paris --> Bern
+  34 Wed 00:00   Wed 08:02   NewYork --> Madrid
+  34 Wed 00:00   Wed 08:02   NewYork --> Madrid
+  61 Wed 06:00   Wed 09:02   Dallas --> NewYork
+   0 Wed 09:00   Wed 21:25   Sydney --> Beijing
+   5 Wed 10:00   Thu 02:44   Sydney --> AbuDhabi
+   5 Wed 10:00   Thu 02:44   Sydney --> AbuDhabi
+   6 Wed 12:00   Thu 04:44   AbuDhabi --> Sydney
+  35 Wed 16:00   Wed 17:36   Oslo --> Tromso
+  35 Wed 16:00   Wed 17:36   Oslo --> Tromso
+  67 Wed 19:00   Thu 02:30   Brisbane --> Jakarta
+  55 Wed 20:00   Wed 23:15   Beijing --> Hanoi
+   1 Wed 22:25   Thu 05:40   Beijing --> Jakarta
+   2 Wed 23:25   Thu 02:40   Beijing --> Hanoi
+   3 Thu 00:25   Thu 11:11   Hanoi --> Sydney
+   3 Thu 00:25   Thu 11:11   Hanoi --> Sydney
+   7 Thu 12:00   Thu 17:59   AbuDhabi --> Rome
+  11 Thu 13:00   Thu 14:45   Oslo --> Alta
+  68 Thu 14:00   Thu 20:16   Lagos --> Johannesburg
+  12 Thu 15:45   Thu 17:30   Oslo --> Alta
+  13 Thu 16:00   Thu 17:20   Longyearbyen --> Tromso
+  16 Thu 19:00   Thu 20:36   Oslo --> London
+  17 Thu 21:45   Thu 22:06   London --> Manchester
+  51 Thu 23:00   Fri 17:29   Sydney --> Ufa
+  18 Thu 23:10   Thu 23:14   Manchester --> Liverpool
+  14 Fri 00:20   Fri 03:10   Longyearbyen --> Oslo
+  15 Fri 01:20   Fri 04:10   Longyearbyen --> Oslo
+  10 Fri 04:00   Fri 06:47   Rome --> Oslo
+  53 Fri 10:00   Sat 01:34   Perth --> Ufa
+   8 Fri 12:00   Fri 17:59   AbuDhabi --> Rome
+  20 Fri 13:00   Sat 01:36   London --> Johannesburg
+  19 Fri 17:00   Sat 00:45   London --> NewYork
+  52 Fri 20:00   Sat 07:50   Perth --> Vladivostok
+  52 Fri 20:00   Sat 07:50   Perth --> Vladivostok
+  49 Sat 04:00   Sat 08:31   Sydney --> Perth
+  50 Sat 06:00   Sat 10:31   Sydney --> Perth
+  48 Sat 09:00   Sat 13:31   Sydney --> Perth
+   9 Sat 12:00   Sat 17:59   AbuDhabi --> Rome
+
+User: Application closed.

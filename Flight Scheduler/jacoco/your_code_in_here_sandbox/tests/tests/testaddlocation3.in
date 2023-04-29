@@ -1,0 +1,10 @@
+location add Sydney -99 150.651786 0.4
+location add Brisbane -27.4732824 230.747337 0.3
+location add Dubbo -32.2811022 148.3241332 -4
+location add Dubbo -32.2811022 148.3241332 10
+location add Dubbo -32.2811022 148.3241332 0.4
+location add Dubbo -32.2811022 148.3241332 0.4
+location Dubbo
+location Sydney
+exit
+

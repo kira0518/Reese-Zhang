@@ -1,0 +1,16 @@
+User: Imported 51 locations.
+
+User: Usage: FLIGHT ADD <departure time> <from> <to> <capacity>
+Example: FLIGHT ADD Monday 18:00 Sydney Melbourne 120
+
+User: Invalid positive integer capacity.
+
+User: Invalid departure time. Use the format <day_of_week> <hour:minute>, with 24h time.
+
+User: Invalid departure time. Use the format <day_of_week> <hour:minute>, with 24h time.
+
+User: Invalid departure time. Use the format <day_of_week> <hour:minute>, with 24h time.
+
+User: Invalid positive integer capacity.
+
+User: Application closed.

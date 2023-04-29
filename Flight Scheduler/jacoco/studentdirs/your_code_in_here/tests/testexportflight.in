@@ -1,0 +1,7 @@
+location import locations.csv
+flight add monday 00:44 Berlin NewYork 250
+flights
+flight export
+flight export text.csv
+exit
+

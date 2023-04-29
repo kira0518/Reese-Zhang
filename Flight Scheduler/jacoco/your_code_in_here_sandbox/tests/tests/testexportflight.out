@@ -1,0 +1,15 @@
+User: Imported 51 locations.
+
+User: Successfully added Flight 0.
+
+User: Flights
+-------------------------------------------------------
+ID   Departure   Arrival     Source --> Destination
+-------------------------------------------------------
+   0 Mon 00:44   Mon 09:36   Berlin --> NewYork
+
+User: Error writing file.
+
+User: Exported 1 flight.
+
+User: Application closed.

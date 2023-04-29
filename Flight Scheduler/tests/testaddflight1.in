@@ -1,0 +1,6 @@
+location add Perth -33.87 150.6 0.5
+flight add monday 18:00 Sydney Melbourne 120
+flights 0
+locations
+exit
+
