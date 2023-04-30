@@ -1,0 +1,1103 @@
+Received: from SYCPR01MB4000.ausprd01.prod.outlook.com (2603:10c6:10:38::22)
+ by SYBPR01MB5549.ausprd01.prod.outlook.com with HTTPS; Wed, 19 Oct 2022
+ 04:17:13 +0000
+ARC-Seal: i=3; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=VENw+iRtKcJ3a7lj9Eir2k6OAnk8whYz+stG8LDIa0BotGkvjUbyzkPeLze8KhsfelmB+FNi5aNekk+VHP3xxxKst7N8/0ggbVfGzhnQJ1oT9/7fn3ftPQApXgiGkcczwAIMwSAYV4oDr4VvfusorQBWjF4sA63GeZaL0HS3HIe7hRQetNuRLphNWQc93rbl1b+ieFqIjZ2+ddjiUF0HrAemEfOFGuReHEUFwwn2KCSu9DipPRVZbNv6PacymY4VXwnEWYtkiyVLBUefpco9u+GkiXFK2uShdGeibnERsm2u+YFivzyePC8J4QRhXgm/ADM6uO59JGpQ0DxD+nPtLg==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sBwXYwFjgUwGj9XO6R7uDkeIKHsAAl0c+6sigsGVlxc=;
+ b=mjxBfobIFSeg+1XfppLCp54B197rkib0E5dAnMw6p4ZSXRsTGupaIHltLFSZHMpLwIVI7WiLKbZntEUXFxfmC1BH7XOchwwFYq8kO9ZcRj5M2Ixk1EBM5czWStkCZ+/fV/CvrAVjDlYulmPhkGhQUG0WZcCQHhJycMC+nDBX4FoTGu5yMGXIsgtj/ykScIBMyDPaOAGPJpIMGNL5GMwvxFO4PqPoB+BZg2qxjGwvyPTsZstJucuOLrCAnKDHRh7Poapo/MD9VTwe/RdpJckeriRKj97QYv3Q+ugQF4C3q9xtNKCuAknSPCrXxMuBLJbuDzkhdsfVtZ2BMBfp3Rideg==
+ARC-Authentication-Results: i=3; mx.microsoft.com 1; spf=pass (sender ip is
+ 124.47.150.101) smtp.rcpttodomain=uni.sydney.edu.au
+ smtp.mailfrom=sydney.edu.au; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=sydney.edu.au; dkim=fail (body hash did not verify)
+ header.d=sydney.edu.au; arc=pass (0 oda=0 ltdi=0 93)
+Received: from ME2PR01CA0220.ausprd01.prod.outlook.com (2603:10c6:220:19::16)
+ by SYCPR01MB4000.ausprd01.prod.outlook.com (2603:10c6:10:38::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Wed, 19 Oct
+ 2022 04:17:11 +0000
+Received: from ME3AUS01FT015.eop-AUS01.prod.protection.outlook.com
+ (2603:10c6:220:19:cafe::53) by ME2PR01CA0220.outlook.office365.com
+ (2603:10c6:220:19::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34 via Frontend
+ Transport; Wed, 19 Oct 2022 04:17:11 +0000
+Authentication-Results: spf=pass (sender IP is 124.47.150.101)
+ smtp.mailfrom=sydney.edu.au; dkim=fail (body hash did not verify)
+ header.d=sydney.edu.au;dmarc=pass action=none
+ header.from=sydney.edu.au;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of sydney.edu.au designates
+ 124.47.150.101 as permitted sender) receiver=protection.outlook.com;
+ client-ip=124.47.150.101; helo=au-smtp-1.mimecast.com; pr=C
+Received: from au-smtp-1.mimecast.com (124.47.150.101) by
+ ME3AUS01FT015.mail.protection.outlook.com (10.114.155.141) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5746.16 via Frontend Transport; Wed, 19 Oct 2022 04:17:11 +0000
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed;
+	d=dkim.mimecast.com; s=201903; t=1666153030;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=sBwXYwFjgUwGj9XO6R7uDkeIKHsAAl0c+6sigsGVlxc=;
+	b=TLTMQ8Z+F89rjdRhqeNAJ5YuwqpSfrfB/wABADKVa1QCXmdX8rsgMtMLdzfNGPQVKuwOlY
+	VnQAqmD8pjET0lqca/mFcq1hpV0RkhXWfJt+5QuzsZhX8wKNcaTayjo5h9GW/n+bHnanRc
+	YjCfWAVAB+cjqeNgojSd6fvKZ1nqNCnrRJJ3xlEc2YZp2fNKUXwc8ysLBrX3f16rK2ZiEi
+	QNSKw6nAIN/uidh2qyJBs4HYvKX//HKfktfuKVI+HYChII0EzYxxYNsT7pbMwhGa90NrUm
+	ESdJf4I1KUSAOinIFYbjlYozjTh28tiA6Nkuj9dc0nca1cjnSVQ8CkpIeu8ewA==
+ARC-Seal: i=2; s=201903; d=dkim.mimecast.com; t=1666153030; a=rsa-sha256;
+	cv=pass;
+	b=LWWM/MsPr6VbSpuZTXWKnvF8D5dPFlR2clOwDDgkZtPxAWggwz6k9bItVfOpEdr6eb6DIw
+	FkwVcWYHIuG9zmdLYGcXceaAPpCqMyDWO9O9cFOBQb4EWoJBkCkpBaOp4Dga9q+S98cLbG
+	F6S9PwhqSuIyRW61Lg1ECxHTqHLJHP9aMhsjbe50td5C6XjcKEUY8h5nCyzfhVRPUkalFA
+	eVoNP1SSx/nXNmazFZAy5Zd6xgluPYq2OjmGqEvnBvA0Qw8vqLiDc5AkLwzfdxaWszEkaW
+	38KGYZVVOR93WdYosvkhSLehMtE8q8SeQ3KvzurJUdzy42tjSipzmCeisWvvpA==
+ARC-Authentication-Results: i=2;
+	relay.mimecast.com;
+	dkim=pass header.d=sydney.edu.au header.s=selector1 header.b=mGacpyi0;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	dmarc=pass (policy=quarantine) header.from=sydney.edu.au;
+	spf=pass (relay.mimecast.com: domain of simon.poon@sydney.edu.au designates 40.107.107.68 as permitted sender) smtp.mailfrom=simon.poon@sydney.edu.au
+Received: from AUS01-SY4-obe.outbound.protection.outlook.com
+ (mail-sy4aus01on2068.outbound.protection.outlook.com [40.107.107.68]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ au-mta-112-zFPK6SvgOTaBhGtG_Ep4Og-1; Wed, 19 Oct 2022 15:17:09 +1100
+X-MC-Unique: zFPK6SvgOTaBhGtG_Ep4Og-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SluSRa7/+SjEqjgCetupIPCkR0oI0g2689fYOnVdS86IhSNUy8s+unp6kMWRgXcG8VdHqzCRNgf5VghFG9VIjL9Eirl+t/Ngd4vnAzJcFJCJHjJcJqMFowVCPvYB1bPV015oqzDbSjmEvzsdz9fZwZl9HzuT8KuHK4VKYH9NFepVzw1H1k1kIuSCLOyYFQeFioSVs8K0drlG08QCpWfuXyGPm4Fb+Hoxe3rd8nb1PVBqXsJSUco5Ip3aqrLJSsTf/5GzsR03K8rhnCp2qYWhF8VRTSDc3cc6OYUpRIm1/EXPAzRPLVxxrLnHzeag4OUSEeJ9ZYrCcbkcJlnTxADIXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NTEJFrGvlWzYW+sMlyqTbEsYMMh2XtsTUYP2ev7FqMs=;
+ b=NZhkp62ED63koLGKdWdFb7z8rfB0tK2d9ecGkjkTQL8mZNj5BfsLlzW/eeJ1u8+XJJ9pEhHhT0c57KxuZ5L4j/8V7WejlPje0ofZIE5kbSuxzn+ZarWyoY7pfVn0u6dSgK/PFd/H9SJ682YEmMd1UWWOLNL5w9ca1nd2Oq2bltIj3ER5zjosnhDzIjEhhLhjXbNQHFsM3Z9zCwIn1AaCd3Po12DrJTFLnzyROgKq+EOxIBPKq+fJIE/goSG6XjtcTKVrYGga8Zp1hlEqgLW1zns6O8pl3S31cbR2ZnLaVbQl7iK8tsLWJStPt1SoOLtvIurt98Yyw7tXx/XTw4C5Tg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sydney.edu.au; dmarc=pass action=none
+ header.from=sydney.edu.au; dkim=pass header.d=sydney.edu.au; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sydney.edu.au;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NTEJFrGvlWzYW+sMlyqTbEsYMMh2XtsTUYP2ev7FqMs=;
+ b=mGacpyi01A3qo++neWdz9Bz3ZDIuqUOmSFyo19zLPE97FdvycCRgZDQSgkR5EcjJSauKC6rvOjsHxqujAZGBhdbpqbtVyM0QVOL48BSqGjcmv1XIGdlezxUwZWoF0N9TT/39BrKY8wba59ZNufTqbRwFdDSSEO9jSTzXb7hfTqjDUdwb+DltqMn5salbCjzEQj9FfzXnfEPuK0DTz17IsxfdMLTXyc55KVrFeFoBgMCuYWjXpEWebNdm55mAUJEQrElIZSOv0TMRb+w+bDxIcsivFz1ZVM7q82nc1t86GN7BzTkCE3mZi/qhXU5wrqrkBZWjRYOTS4eS/KC3L20ZJQ==
+Received: from SYCPR01MB4175.ausprd01.prod.outlook.com (2603:10c6:10:f::16) by
+ SYCPR01MB3293.ausprd01.prod.outlook.com (2603:10c6:10:3c::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5723.32; Wed, 19 Oct 2022 04:17:05 +0000
+Received: from SYCPR01MB4175.ausprd01.prod.outlook.com
+ ([fe80::da46:7f6f:7f53:82e6]) by SYCPR01MB4175.ausprd01.prod.outlook.com
+ ([fe80::da46:7f6f:7f53:82e6%7]) with mapi id 15.20.5723.034; Wed, 19 Oct 2022
+ 04:17:05 +0000
+From: Simon Poon <simon.poon@sydney.edu.au>
+To: Neysa Petrina <neysa.petrina@sydney.edu.au>, Cailin Feldman
+	<cfel2589@uni.sydney.edu.au>, Zichen Li <zili4471@uni.sydney.edu.au>, Baoxi
+ Liu <bliu3122@uni.sydney.edu.au>, Jingbang Men <jmen0495@uni.sydney.edu.au>,
+	Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au>, Kiran Papalkar
+	<kpap8603@uni.sydney.edu.au>, Zheyuan Zhang <zzha3548@uni.sydney.edu.au>
+Subject: RE: Meeting 26th of Oct
+Thread-Topic: Meeting 26th of Oct
+Thread-Index: AQHY41DB9ETnYlZljkOmrq7OT8T1zK4U+S4AgAAhlAA=
+Date: Wed, 19 Oct 2022 04:17:05 +0000
+Message-ID: <SYCPR01MB41754D5A811723DE514D7DBBC02B9@SYCPR01MB4175.ausprd01.prod.outlook.com>
+References: <SYBPR01MB6939618558D2A3D4B2AAEE79D07E9@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <ME1PR01MB1443C2C872473A45368D12EBBD7E9@ME1PR01MB1443.ausprd01.prod.outlook.com>
+ <ME3PR01MB69330D6B1A7529661736E16BD07E9@ME3PR01MB6933.ausprd01.prod.outlook.com>
+ <ME3PR01MB693321CD02AD11201C488FE6D07E9@ME3PR01MB6933.ausprd01.prod.outlook.com>
+ <SYBPR01MB6939FFD3B8AF5659D5E974ECD0459@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYBPR01MB69390F036B2C9E674433828BD0479@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYCPR01MB417549D19C2E24078F8D6318C0479@SYCPR01MB4175.ausprd01.prod.outlook.com>
+ <SYXPR01MB1454B71056FB4EF20942EF40BD4C9@SYXPR01MB1454.ausprd01.prod.outlook.com>
+ <SYBPR01MB6939B11AE3B9520B8B540D50D04C9@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYCPR01MB417504D9292F2B13B0DE35F0C04F9@SYCPR01MB4175.ausprd01.prod.outlook.com>
+ <SYBPR01MB693920A9CA5EC504372463B0D05A9@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYXPR01MB1454F6311FFCBC5769247228BD5A9@SYXPR01MB1454.ausprd01.prod.outlook.com>
+ <SYCPR01MB4175C1CB0E8B0555E668F396C05A9@SYCPR01MB4175.ausprd01.prod.outlook.com>
+ <SYBPR01MB6939D9FA96EC919676B60224D0289@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYBPR01MB6939DCF31DEF460B028DDED5D02B9@SYBPR01MB6939.ausprd01.prod.outlook.com>
+ <SYXPR01MB1454946DE5DEF55AB6563877BD2B9@SYXPR01MB1454.ausprd01.prod.outlook.com>
+In-Reply-To: <SYXPR01MB1454946DE5DEF55AB6563877BD2B9@SYXPR01MB1454.ausprd01.prod.outlook.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+x-ms-traffictypediagnostic:
+ SYCPR01MB4175:EE_|SYCPR01MB3293:EE_|ME3AUS01FT015:EE_|SYCPR01MB4000:EE_
+X-MS-Office365-Filtering-Correlation-Id: e49ff4f3-7d61-4281-3586-08dab188cb68
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0
+X-Microsoft-Antispam-Message-Info-Original:
+ 2qnjiooKSSIQ/k9RuYdhimTZN82VaSHEiJEx4ggEr2CHMNBG88cmz+e9JNeYHn8xtuHyBaBhEAjipN0b17p4+VE0JRzRm/rewkk3lFM/9wLkQBcSq24GXOJYckth0yxoNByBTUwvCte1piKGPlmS+Se/E087nJleYRl5h5MaFTDgyNFS277Ng4pWCh+1YtXIKjRpMY0LyU3E2IUcOFhWZcphLEsi07av/aCzmyfG9v+3Q9uA8Gmjlgz/KpM+ieMiMjdAPqUVg2P63xcuunzK299nlXsPzMaMabE9R7N/wrth46SFZgILdxNftor6jmC4Ea91HgmpQTB4uk61+hMqJnnQLhr/5sVNlAQACDvfRgAsKXLMufzJAIj9BaVvq+hVB32a6Jyrul0JIcUTNUv9S8Vc9vwcml/EuQ8Jxy9dEpWNDcMVduLC2aMQRPNOxii9ggHdLRldM9un0G9vKKZsf51BTQDkEl6XMdFdFKdrK8VgW9hWp7KzVbc1uMkzp7rcJWYKLJ7ElZM9qjnM1ZRYocfPyE3187jOrp8zoCEj/ebcYFxfzF1tYDo1N5WuaUrMos4Sh3ivIVBqSyZXtye3l5ZG1XeLinfPBlzs8vKUXm99Bu1q5tcqC6C/zzyaLm0o3wGdPhipK5Td//XjAYMf+/f8rdwXh3FvjRF/kKnWya8j7NJib3aUU0t+lWmqN0tuXKAwfjfH7XYEOPWb+1SFkE7pAh8i/s6iRe3aaKz1IbysHygAqvTzSngHkXsjWEeo1JiKMAw5tkvyPuEiY4bRAyX/1P7HzOT4Yk+2phbjxOk=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SYCPR01MB4175.ausprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(376002)(346002)(136003)(366004)(396003)(39860400002)(451199015)(66899015)(5660300002)(52536014)(44832011)(41320700001)(8936002)(8676002)(66476007)(66946007)(64756008)(66556008)(66446008)(53546011)(7696005)(6506007)(76116006)(316002)(296002)(786003)(110136005)(2906002)(33656002)(122000001)(41300700001)(478600001)(86362001)(71200400001)(450100002)(38100700002)(9686003)(166002)(966005)(83380400001)(186003)(45080400002)(55016003)(38070700005)(26005);DIR:OUT;SFP:1101
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYCPR01MB3293
+Authentication-Results-Original: relay.mimecast.com;	dkim=pass
+ header.d=sydney.edu.au header.s=selector1 header.b=mGacpyi0;	arc=pass
+ ("microsoft.com:s=arcselector9901:i=1");	dmarc=pass (policy=quarantine)
+ header.from=sydney.edu.au;	spf=pass (relay.mimecast.com: domain of
+ simon.poon@sydney.edu.au designates 40.107.107.68 as permitted sender)
+ smtp.mailfrom=simon.poon@sydney.edu.au
+X-Mimecast-Spam-Score: 0
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_SYCPR01MB41754D5A811723DE514D7DBBC02B9SYCPR01MB4175ausp_"
+Return-Path: simon.poon@sydney.edu.au
+X-MS-Exchange-Organization-ExpirationStartTime: 19 Oct 2022 04:17:11.2619
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ e49ff4f3-7d61-4281-3586-08dab188cb68
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 7be93ba7-4482-49d0-a512-7c6818096e33:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ ME3AUS01FT015.eop-AUS01.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ ME3AUS01FT015.eop-AUS01.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+ 30e9dc10-4c7b-40cf-4304-08dab188c7d7
+X-MS-Exchange-Organization-BypassFocusedInbox: true
+X-MS-Exchange-Organization-SCL: -1
+X-Microsoft-Antispam: BCL:0;
+X-Forefront-Antispam-Report:
+ CIP:124.47.150.101;CTRY:AU;LANG:en;SCL:-1;SRV:;IPV:CAL;SFV:NSPM;H:au-smtp-1.mimecast.com;PTR:au-smtp-delivery-1.mimecast.com;CAT:NONE;SFS:;DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2022 04:17:11.2150
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e49ff4f3-7d61-4281-3586-08dab188cb68
+X-MS-Exchange-CrossTenant-Id: 7be93ba7-4482-49d0-a512-7c6818096e33
+X-MS-Exchange-CrossTenant-AuthSource:
+ ME3AUS01FT015.eop-AUS01.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYCPR01MB4000
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.8764097
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5723.034
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);
+X-Microsoft-Antispam-Message-Info:
+	=?Windows-1252?Q?QpMA5weGL3gB82yynoknCfaM6xM+Ib8WkhLj55WzsPCFdbvBk/scBI4m?=
+ =?Windows-1252?Q?1T2qb4vxx60roU7q0fc+wTs2YdD/a4W6XdLjaUquZGa4Qh1S+1oQLxVy?=
+ =?Windows-1252?Q?5ygvCAJjdqO/XsyOpEGD16SCbUv1Up9Vv3RTspovwJsX59bZMvzCJCsf?=
+ =?Windows-1252?Q?fpmWeeyNWHW7xEYcq3snwX8TqhxwZt7sYZ/Se2Wz3CBOTgbzqf5pnrlq?=
+ =?Windows-1252?Q?d6evfPG033U1+LMMRSVj1gXCFMtSUGJ7x4W0Vynk/1WNS9ESx8pCBxfK?=
+ =?Windows-1252?Q?jXUpjeYs9Z8xu5dFgQmqTTZS+k0miT73P5Fxksx1vkwmg5DTFtf1f8Rk?=
+ =?Windows-1252?Q?WGCA+2vWvivIiANqcL62MfB2IUhka0f2m0EVyMK+XnLwJTCBLL5tXWZf?=
+ =?Windows-1252?Q?9dp3VC1MwfcMXB0UtWglQVXcKYCacChVVNNBgfllf6DgpmIpBMWIJOsw?=
+ =?Windows-1252?Q?ZvCOtpvYtib0GzrXUWr9PCoMeIbfZq/7zlL+MFk+vKU04iZrVIUN8NZe?=
+ =?Windows-1252?Q?vBK81Jc1jWJplwt1nNrcW7MRLXtNvUQyDzO5reJtkoe15t6vYirSRuxX?=
+ =?Windows-1252?Q?+Jhd/I9jypC+/fyvCK04XJnDF8zzERnSGV4QgoekLSly/CIf5ZQUYk1x?=
+ =?Windows-1252?Q?cEJvqF4q/qcFrxV0+oxfHUklCukEoKhuN19NeNn7KpBFZodsEWzrv3w/?=
+ =?Windows-1252?Q?S+UrYcjGVLOIp+kMYM2H/E2N5V2aoZ2ajQSokzdeGl8Ew2VBdzHAttlT?=
+ =?Windows-1252?Q?gYWZqIwfEBUN/Icji2G+OLX0qFrCteJ4yrpuF2i1+CE6w3i1szva9LpD?=
+ =?Windows-1252?Q?+UeNQngEvAsgc/9KtKFj5GcGi/RXqtZodXEHIkZYVSTZfQ2vSMSy+xfi?=
+ =?Windows-1252?Q?0WDXXyB2Hpw9F1DCnuopNatLMpDxEMqHKmvortT/xGFZ41jjL4SgEX2l?=
+ =?Windows-1252?Q?iNdaMtVDk2dznXtpJa4V1leZOB0gK2bLfQwoXdkMW/BRW0V5bjT0bWJ1?=
+ =?Windows-1252?Q?vP4hSKO3FGF0oG8COIKhE7LzJI3SB/NJ2QwI9nsf8zPsKsSnw3qrV+65?=
+ =?Windows-1252?Q?6CI/tqqJI2HhEd1W9djb4jbi6FPNwlYZVHXPrRC5NIhF3YAZHhJ0OVuk?=
+ =?Windows-1252?Q?VwBQHir+qTZRBkGoJpeClUEo3FT1dYUk7yNENiQulFGLbLiL/SScIXGo?=
+ =?Windows-1252?Q?9A/Xgh6kNQRHGs6WOQR2vABfn62+bltCwS2HsMCShpsjlhD0qxzOdZm0?=
+ =?Windows-1252?Q?YbGYqN4AKCFUjithLH2fQgoaWMS0mhJafUlwKzgYi8TOuWJzFLDPVMLG?=
+ =?Windows-1252?Q?AYbn7yB40ZdwnlhiZh6+AVF/Tc8Af+UPte/gLAQ4jcWssza6MK+ZdrG5?=
+ =?Windows-1252?Q?g9PKyuRF+1MhT7WakT8P52tz4N2w3lO59NQCxbhYGdAWopCUinfhgQ4u?=
+ =?Windows-1252?Q?jeeaI7Ja59qs1ICW3Dfe4PvuCssYOh12ZLd56t7cIxysY+uXuopIFWxa?=
+ =?Windows-1252?Q?CsMHTIo/caggubbkBNr07xb7uVoKza21PB8ElyZgp+3Y+9xXHAm5z01J?=
+ =?Windows-1252?Q?HeBSsrMe5eMDqju7VzObw0dBbEo3n4JrtMU5j+cvKVex/zgfJAmyNvhH?=
+ =?Windows-1252?Q?0N2hM0XtazZJuLjuYKbMOvUbrItwejoF+E0jJDAINgT4ftMXbYX+nrS1?=
+ =?Windows-1252?Q?5ZexrROtMJia4WaEB6SCjTxFVGR2Lq28O0wXHTPw4+bpp0nll7FGdlcm?=
+ =?Windows-1252?Q?y+72a7KatE1sxZBrDLoQE/8/EWsWdZ7QOnzXN7HkubiEYDiO0Z3pwBI3?=
+ =?Windows-1252?Q?BMwdPJW+6tIsNqFrsjRgtQv072+4zuhUqrxjrzVEk1QCfLaJjJUjrGen?=
+ =?Windows-1252?Q?K2o41n6ZVte3iHkY5Oj6l3q67DU4CibZntxV3PQjSd1ouKdEg/RzK2w2?=
+ =?Windows-1252?Q?g6vxY6QsAXBmIF6HKryJaZuXwwmotGm59j0IS3soVjL99GFrfqDI7CsN?=
+ =?Windows-1252?Q?M3OaQ9Re1/NTWVoWDf5VHWPyAlfRAXMg/HYe5+lwJtB0QOmkcrs75ty8?=
+ =?Windows-1252?Q?hjVOPfY/0PXjk6rV8DwnYDrlr8AzCHypnh6le2/li7OXF/uJjfFw3bNc?=
+ =?Windows-1252?Q?a3I8trXi7HJ4ye1SMEs4FksZ1ndfm08G6JAXWqMZDW32bMBxZza0LIen?=
+ =?Windows-1252?Q?7Y/XdK1iRaWSlbSr2UTSGSw5O0qm6n9f?=
+MIME-Version: 1.0
+
+--_000_SYCPR01MB41754D5A811723DE514D7DBBC02B9SYCPR01MB4175ausp_
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
+
+Thanks Neysa.
+
+Hi Team,
+I will be away overseas from tomorrow until October 30. I think Neysa would=
+ be a more suitable client to evaluate the outputs of the work on terms of =
+the actual deliverables against the expectations from the project. It seems=
+ she, as client, would need to comment on teamwork, professionalism and etc=
+.. please confirm.
+Can you send any client documents to Neysa? It's important for her to under=
+stand the assessment criteria from the client perspective.
+
+Thanks,
+Simon
+From: Neysa Petrina <neysa.petrina@sydney.edu.au>
+Sent: Wednesday, 19 October 2022 1:10 PM
+To: Cailin Feldman <cfel2589@uni.sydney.edu.au>; Simon Poon <simon.poon@syd=
+ney.edu.au>; Zichen Li <zili4471@uni.sydney.edu.au>; Baoxi Liu <bliu3122@un=
+i.sydney.edu.au>; Jingbang Men <jmen0495@uni.sydney.edu.au>; Bronte Rhianno=
+n Lee <blee6992@uni.sydney.edu.au>; Kiran Papalkar <kpap8603@uni.sydney.edu=
+.au>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au>
+Subject: RE: Meeting 26th of Oct
+
+Thanks Cailin.
+
+I have blocked that timeslot.
+
+Is there any marking criteria or form that the supervisors need to submit f=
+or the final presentation?
+
+Thanks,
+
+Neysa
+
+From: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney=
+.edu.au>>
+Sent: Wednesday, 19 October 2022 11:21 AM
+To: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>>;=
+ Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydney.edu=
+.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu=
+.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu=
+.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.=
+edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@u=
+ni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap8=
+603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:z=
+zha3548@uni.sydney.edu.au>>
+Subject: Meeting 26th of Oct
+
+Hi @Simon Poon<mailto:simon.poon@sydney.edu.au> and @Neysa Petrina<mailto:n=
+eysa.petrina@sydney.edu.au>.
+
+If you can please block 9am-10am on the 26th of Oct for our final client de=
+ployment presentation meeting.
+We will use this link.
+
+https://uni-sydney.zoom.us/j/9021170690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZ=
+z09
+Join our Cloud HD Video Meeting<https://uni-sydney.zoom.us/j/9021170690?pwd=
+=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZz09>
+Zoom is the leader in modern enterprise video communications, with an easy,=
+ reliable cloud platform for video and audio conferencing, chat, and webina=
+rs across mobile, desktop, and room systems. Zoom Rooms is the original sof=
+tware-based conference room solution used around the world in board, confer=
+ence, huddle, and training rooms, as well as executive offices and classroo=
+ms. Founded in 2011, Zoom helps businesses and organizations bring their te=
+ams together in a frictionless environment to get more done. Zoom is a publ=
+icly traded company headquartered in San Jose, CA.
+uni-sydney.zoom.us
+We will send our final report and slide deck on Monday so you have time to =
+review it before our meeting.
+
+Kind Regards,
+Cailin Feldman
+
+
+________________________________
+From: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney=
+.edu.au>>
+Sent: Wednesday, 19 October 2022 8:42 AM
+To: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>>;=
+ Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydney.edu=
+.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu=
+.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu=
+.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.=
+edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@u=
+ni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap8=
+603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:z=
+zha3548@uni.sydney.edu.au>>
+Subject: Todays meeting
+
+Hi all - sorry I didn't send earlier
+Todays meeting is at 9 at this link
+
+https://uni-sydney.zoom.us/j/9021170690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZ=
+z09
+________________________________
+From: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>=
+>
+Sent: Tuesday, October 4, 2022 7:02:46 PM
+To: Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydney.=
+edu.au>>; Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sy=
+dney.edu.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sy=
+dney.edu.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sy=
+dney.edu.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni=
+.sydney.edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:bl=
+ee6992@uni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mail=
+to:kpap8603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<=
+mailto:zzha3548@uni.sydney.edu.au>>
+Subject: RE: 5th of Oct Meeting
+
+
+Hi Cailin,
+
+
+
+Tomorrow I will leave Neysa to give feedback of your work.
+
+See you next week.
+
+
+
+Simon
+
+
+
+From: Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydne=
+y.edu.au>>
+Sent: Tuesday, 4 October 2022 4:35 PM
+To: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney.e=
+du.au>>; Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.=
+au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu.=
+au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu.=
+au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.e=
+du.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@un=
+i.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap86=
+03@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:zz=
+ha3548@uni.sydney.edu.au>>
+Subject: RE: 5th of Oct Meeting
+
+
+
+Hi Cailin and team,
+
+
+
+I am happy to meet with the team tomorrow at 9am.
+
+
+
+Would you be able to provide the zoom invitation?
+
+
+
+Thanks,
+
+
+
+Neysa
+
+
+
+From: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney=
+.edu.au>>
+Sent: Tuesday, 4 October 2022 2:42 PM
+To: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>>;=
+ Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydney.edu=
+.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu=
+.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu=
+.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.=
+edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@u=
+ni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap8=
+603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:z=
+zha3548@uni.sydney.edu.au>>
+Subject: 5th of Oct Meeting
+
+
+
+Hi Simon and Neysa,
+
+Thank you for all the feedback. We have made great progress as a team durin=
+g the mid sem break.
+
+Are you both available to meet at 9:00am tomorrow so we can have a 30 min m=
+eeting and then at 9:30 when you drop off my team and I will have a group m=
+eeting.
+
+
+
+Kind Regards,
+
+Cailin Feldman
+
+
+
+
+
+Get Outlook for iOS<https://aka.ms/o0ukef>
+
+________________________________
+
+From: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>=
+>
+Sent: Wednesday, September 21, 2022 9:23:46 AM
+To: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney.e=
+du.au>>; Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sy=
+dney.edu.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sy=
+dney.edu.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sy=
+dney.edu.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni=
+.sydney.edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:bl=
+ee6992@uni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mail=
+to:kpap8603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<=
+mailto:zzha3548@uni.sydney.edu.au>>
+Subject: RE: link for meeting today @ 9am
+
+
+
+Thank you Neysa for meeting the team.
+
+
+
+Unfortunately I had doctors appointments during our meeting time. I hope go=
+od progress have been made.
+
+
+
+See you all next time,
+
+Simon
+
+
+
+From: Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney=
+.edu.au>>
+Sent: Wednesday, 21 September 2022 8:54 AM
+To: Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydney.=
+edu.au>>; Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu=
+.au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu=
+.au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu=
+.au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.=
+edu.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@u=
+ni.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap8=
+603@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:z=
+zha3548@uni.sydney.edu.au>>
+Subject: Re: link for meeting today @ 9am
+
+
+
+Hi Neysa.
+
+Yes thank you for checking. We will meet at 9:30 today.
+
+
+
+Get Outlook for iOS<https://aka.ms/o0ukef>
+
+________________________________
+
+From: Neysa Petrina <neysa.petrina@sydney.edu.au<mailto:neysa.petrina@sydne=
+y.edu.au>>
+Sent: Wednesday, September 21, 2022 8:53:30 AM
+To: Simon Poon <simon.poon@sydney.edu.au<mailto:simon.poon@sydney.edu.au>>;=
+ Cailin Feldman <cfel2589@uni.sydney.edu.au<mailto:cfel2589@uni.sydney.edu.=
+au>>; Zichen Li <zili4471@uni.sydney.edu.au<mailto:zili4471@uni.sydney.edu.=
+au>>; Baoxi Liu <bliu3122@uni.sydney.edu.au<mailto:bliu3122@uni.sydney.edu.=
+au>>; Jingbang Men <jmen0495@uni.sydney.edu.au<mailto:jmen0495@uni.sydney.e=
+du.au>>; Bronte Rhiannon Lee <blee6992@uni.sydney.edu.au<mailto:blee6992@un=
+i.sydney.edu.au>>; Kiran Papalkar <kpap8603@uni.sydney.edu.au<mailto:kpap86=
+03@uni.sydney.edu.au>>; Zheyuan Zhang <zzha3548@uni.sydney.edu.au<mailto:zz=
+ha3548@uni.sydney.edu.au>>
+Subject: link for meeting today @ 9am
+
+
+
+Morning team,
+
+
+
+Will our meeting this morning be at the same zoom link as last week?
+
+https://uni-sydney.zoom.us/j/81571191103
+
+
+
+Thanks,
+
+
+
+Neysa
+
+
+
+--_000_SYCPR01MB41754D5A811723DE514D7DBBC02B9SYCPR01MB4175ausp_
+Content-Type: text/html; charset=WINDOWS-1252
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:"Segoe UI Light";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+p.xxmsonormal, li.xxmsonormal, div.xxmsonormal
+	{mso-style-name:x_x_msonormal;
+	margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.xxxmsonormal, li.xxxmsonormal, div.xxxmsonormal
+	{mso-style-name:x_x_xmsonormal;
+	margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.xxxxmsonormal, li.xxxxmsonormal, div.xxxxmsonormal
+	{mso-style-name:x_x_xxmsonormal;
+	margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+p.xxxxxxxxmsonormal, li.xxxxxxxxmsonormal, div.xxxxxxxxmsonormal
+	{mso-style-name:x_x_xxxxxxmsonormal;
+	margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle25
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-AU" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:brea=
+k-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Thanks Ne=
+ysa.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Hi Team, =
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">I will be=
+ away overseas from tomorrow until October 30. I think Neysa would be a mor=
+e suitable client to evaluate the outputs of the work on terms of the actua=
+l deliverables against the expectations
+ from the project. It seems she, as client, would need to comment on teamwo=
+rk, professionalism and etc.. please confirm.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Can you s=
+end any client documents to Neysa? It=92s important for her to understand t=
+he assessment criteria from the client perspective.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Thanks,<o=
+:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Simon<o:p=
+></o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> Neysa Petrina &lt;neysa.petrina@sydney.edu.au&gt;
+<br>
+<b>Sent:</b> Wednesday, 19 October 2022 1:10 PM<br>
+<b>To:</b> Cailin Feldman &lt;cfel2589@uni.sydney.edu.au&gt;; Simon Poon &l=
+t;simon.poon@sydney.edu.au&gt;; Zichen Li &lt;zili4471@uni.sydney.edu.au&gt=
+;; Baoxi Liu &lt;bliu3122@uni.sydney.edu.au&gt;; Jingbang Men &lt;jmen0495@=
+uni.sydney.edu.au&gt;; Bronte Rhiannon Lee &lt;blee6992@uni.sydney.edu.au&g=
+t;;
+ Kiran Papalkar &lt;kpap8603@uni.sydney.edu.au&gt;; Zheyuan Zhang &lt;zzha3=
+548@uni.sydney.edu.au&gt;<br>
+<b>Subject:</b> RE: Meeting 26th of Oct<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Thanks Ca=
+ilin.<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">I have bl=
+ocked that timeslot.
+<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Is there =
+any marking criteria or form that the supervisors need to submit for the fi=
+nal presentation?<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Thanks,<o=
+:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US">Neysa<o:p=
+></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-US"><o:p>&nbs=
+p;</o:p></span></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.sydney.edu.au=
+">cfel2589@uni.sydney.edu.au</a>&gt;
+<br>
+<b>Sent:</b> Wednesday, 19 October 2022 11:21 AM<br>
+<b>To:</b> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydney.edu.au">simon=
+.poon@sydney.edu.au</a>&gt;; Neysa Petrina &lt;<a href=3D"mailto:neysa.petr=
+ina@sydney.edu.au">neysa.petrina@sydney.edu.au</a>&gt;; Zichen Li &lt;<a hr=
+ef=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;=
+;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> Meeting 26th of Oct<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">Hi <a i=
+d=3D"OWAAM82978" href=3D"mailto:simon.poon@sydney.edu.au">
+<span style=3D"font-family:&quot;Calibri&quot;,sans-serif;text-decoration:n=
+one">@Simon Poon</span></a>&nbsp;and
+<a id=3D"OWAAM296468" href=3D"mailto:neysa.petrina@sydney.edu.au"><span sty=
+le=3D"font-family:&quot;Calibri&quot;,sans-serif;text-decoration:none">@Ney=
+sa Petrina</span></a>.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">If you =
+can please block 9am-10am on the 26<sup>th</sup>&nbsp;of Oct for our final =
+client deployment presentation meeting.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">We will=
+ use this link.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black"><a href=
+=3D"https://uni-sydney.zoom.us/j/9021170690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoO=
+HVYZz09" target=3D"_blank"><span style=3D"font-size:11.5pt;font-family:&quo=
+t;Arial&quot;,sans-serif;background:yellow">https://uni-sydney.zoom.us/j/90=
+21170690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZz09</span></a><o:p></o:p></span=
+></p>
+</div>
+<div>
+<div style=3D"margin-top:12.0pt;margin-bottom:12.0pt;min-width: 424px" id=
+=3D"LPBorder_GTaHR0cHM6Ly91bmktc3lkbmV5Lnpvb20udXMvai85MDIxMTcwNjkwP3B3ZD1k=
+RlF5V1dwV0x6aEJPVTl0UW1adWVHcG9PSFZZWnowOQ..">
+<table class=3D"MsoNormalTable" border=3D"1" cellspacing=3D"3" cellpadding=
+=3D"0" width=3D"100%" style=3D"width:100.0%;border:solid #C8C8C8 1.0pt">
+<tbody>
+<tr>
+<td width=3D"100%" valign=3D"top" style=3D"width:100.0%;border:none;padding=
+:9.0pt 27.0pt 9.0pt 9.0pt">
+<div style=3D"margin-right:6.0pt;margin-bottom:9.0pt" id=3D"LPTitle428003">
+<p class=3D"MsoNormal"><span style=3D"font-size:16.0pt;font-family:&quot;Se=
+goe UI Light&quot;,sans-serif"><a href=3D"https://uni-sydney.zoom.us/j/9021=
+170690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZz09" target=3D"_blank"><span styl=
+e=3D"text-decoration:none">Join our Cloud HD Video Meeting</span></a><o:p><=
+/o:p></span></p>
+</div>
+<div style=3D"margin-right:6.0pt;margin-bottom:9.0pt;max-height: 100px;over=
+flow:hidden" id=3D"LPDescription428003">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#666666">Zoom is the leader in modern enterpr=
+ise video communications, with an easy, reliable cloud platform for video a=
+nd audio conferencing, chat, and webinars across
+ mobile, desktop, and room systems. Zoom Rooms is the original software-bas=
+ed conference room solution used around the world in board, conference, hud=
+dle, and training rooms, as well as executive offices and classrooms. Found=
+ed in 2011, Zoom helps businesses
+ and organizations bring their teams together in a frictionless environment=
+ to get more done. Zoom is a publicly traded company headquartered in San J=
+ose, CA.<o:p></o:p></span></p>
+</div>
+<div id=3D"LPMetadata428003">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:&quot;Se=
+goe UI&quot;,sans-serif;color:#A6A6A6">uni-sydney.zoom.us<o:p></o:p></span>=
+</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">We will=
+ send our final report and slide deck on Monday so you have time to review =
+it before our meeting.<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">Kind Re=
+gards,<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black">Cailin =
+Feldman&nbsp;<o:p></o:p></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;color:black"><o:p>&n=
+bsp;</o:p></span></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">From:</span></b><span=
+ style=3D"color:black"> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.s=
+ydney.edu.au">cfel2589@uni.sydney.edu.au</a>&gt;<br>
+<b>Sent:</b> Wednesday, 19 October 2022 8:42 AM<br>
+<b>To:</b> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydney.edu.au">simon=
+.poon@sydney.edu.au</a>&gt;; Neysa Petrina &lt;<a href=3D"mailto:neysa.petr=
+ina@sydney.edu.au">neysa.petrina@sydney.edu.au</a>&gt;; Zichen Li &lt;<a hr=
+ef=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;=
+;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> Todays meeting </span><o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal">Hi all - sorry I didn't send earlier&nbsp;<o:p></o:p=
+></p>
+</div>
+<div>
+<p class=3D"MsoNormal">Todays meeting is at 9 at this link&nbsp;<o:p></o:p>=
+</p>
+</div>
+<div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><a href=3D"https://uni-sydney.zoom.us/j/9021170690?p=
+wd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZz09">https://uni-sydney.zoom.us/j/9021170=
+690?pwd=3DdFQyWWpWLzhBOU9tQmZueGpoOHVYZz09</a><o:p></o:p></p>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"2" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"x_divRplyFwdMsg">
+<p class=3D"MsoNormal"><b><span style=3D"color:black">From:</span></b><span=
+ style=3D"color:black"> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydney.=
+edu.au">simon.poon@sydney.edu.au</a>&gt;<br>
+<b>Sent:</b> Tuesday, October 4, 2022 7:02:46 PM<br>
+<b>To:</b> Neysa Petrina &lt;<a href=3D"mailto:neysa.petrina@sydney.edu.au"=
+>neysa.petrina@sydney.edu.au</a>&gt;; Cailin Feldman &lt;<a href=3D"mailto:=
+cfel2589@uni.sydney.edu.au">cfel2589@uni.sydney.edu.au</a>&gt;; Zichen Li &=
+lt;<a href=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au=
+</a>&gt;;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> RE: 5th of Oct Meeting</span> <o:p></o:p></p>
+<div>
+<p class=3D"MsoNormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"xxmsonormal">Hi Cailin,<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Tomorrow I will leave Neysa to give feedback of yo=
+ur work.<o:p></o:p></p>
+<p class=3D"xxmsonormal">See you next week.<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Simon <o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"xxmsonormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> Neysa Petrina &lt;<a href=3D"mailto:neysa.petrina@sydney.edu.au=
+">neysa.petrina@sydney.edu.au</a>&gt;
+<br>
+<b>Sent:</b> Tuesday, 4 October 2022 4:35 PM<br>
+<b>To:</b> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.sydney.edu.au"=
+>cfel2589@uni.sydney.edu.au</a>&gt;; Simon Poon &lt;<a href=3D"mailto:simon=
+.poon@sydney.edu.au">simon.poon@sydney.edu.au</a>&gt;; Zichen Li &lt;<a hre=
+f=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> RE: 5th of Oct Meeting</span><o:p></o:p></p>
+</div>
+</div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Hi Cailin and team, <o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">I am happy to meet with the team tomorrow at 9am. =
+<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Would you be able to provide the zoom invitation? =
+<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Thanks,<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxmsonormal">Neysa<o:p></o:p></p>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"xxmsonormal"><b><span lang=3D"EN-US">From:</span></b><span lang=
+=3D"EN-US"> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.sydney.edu.au=
+">cfel2589@uni.sydney.edu.au</a>&gt;
+<br>
+<b>Sent:</b> Tuesday, 4 October 2022 2:42 PM<br>
+<b>To:</b> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydney.edu.au">simon=
+.poon@sydney.edu.au</a>&gt;; Neysa Petrina &lt;<a href=3D"mailto:neysa.petr=
+ina@sydney.edu.au">neysa.petrina@sydney.edu.au</a>&gt;; Zichen Li &lt;<a hr=
+ef=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;=
+;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> 5th of Oct Meeting</span><o:p></o:p></p>
+</div>
+</div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<div>
+<div>
+<p class=3D"xxmsonormal">Hi Simon and Neysa,&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">Thank you for all the feedback. We have made great=
+ progress as a team during the mid sem break.&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">Are you both available to meet at 9:00am tomorrow =
+so we can have a 30 min meeting and then at 9:30 when you drop off my team =
+and I will have a group meeting.&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">Kind Regards,<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">Cailin Feldman&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+<div id=3D"x_x_ms-outlook-mobile-signature">
+<div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+<p class=3D"xxmsonormal">Get <a href=3D"https://aka.ms/o0ukef">Outlook for =
+iOS</a><o:p></o:p></p>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"1" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"x_x_divRplyFwdMsg">
+<p class=3D"xxmsonormal"><b><span style=3D"color:black">From:</span></b><sp=
+an style=3D"color:black"> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydne=
+y.edu.au">simon.poon@sydney.edu.au</a>&gt;<br>
+<b>Sent:</b> Wednesday, September 21, 2022 9:23:46 AM<br>
+<b>To:</b> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.sydney.edu.au"=
+>cfel2589@uni.sydney.edu.au</a>&gt;; Neysa Petrina &lt;<a href=3D"mailto:ne=
+ysa.petrina@sydney.edu.au">neysa.petrina@sydney.edu.au</a>&gt;; Zichen Li &=
+lt;<a href=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au=
+</a>&gt;;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> RE: link for meeting today @ 9am</span> <o:p></o:p></p>
+<div>
+<p class=3D"xxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"xxxmsonormal">Thank you Neysa for meeting the team.<o:p></o:p><=
+/p>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxxmsonormal">Unfortunately I had doctors appointments during o=
+ur meeting time. I hope good progress have been made.<o:p></o:p></p>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxxmsonormal">See you all next time,<o:p></o:p></p>
+<p class=3D"xxxmsonormal">Simon<o:p></o:p></p>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"xxxmsonormal"><b><span lang=3D"EN-US">From:</span></b><span lan=
+g=3D"EN-US"> Cailin Feldman &lt;<a href=3D"mailto:cfel2589@uni.sydney.edu.a=
+u">cfel2589@uni.sydney.edu.au</a>&gt;
+<br>
+<b>Sent:</b> Wednesday, 21 September 2022 8:54 AM<br>
+<b>To:</b> Neysa Petrina &lt;<a href=3D"mailto:neysa.petrina@sydney.edu.au"=
+>neysa.petrina@sydney.edu.au</a>&gt;; Simon Poon &lt;<a href=3D"mailto:simo=
+n.poon@sydney.edu.au">simon.poon@sydney.edu.au</a>&gt;; Zichen Li &lt;<a hr=
+ef=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;=
+;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> Re: link for meeting today @ 9am</span><o:p></o:p></p>
+</div>
+</div>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+<div>
+<div>
+<div>
+<p class=3D"xxxmsonormal">Hi Neysa.&nbsp;<o:p></o:p></p>
+</div>
+<div>
+<p class=3D"xxxmsonormal">Yes thank you for checking. We will meet at 9:30 =
+today.&nbsp;<o:p></o:p></p>
+</div>
+<div id=3D"x_x_x_ms-outlook-mobile-signature">
+<div>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+<p class=3D"xxxmsonormal">Get <a href=3D"https://aka.ms/o0ukef">Outlook for=
+ iOS</a><o:p></o:p></p>
+</div>
+</div>
+</div>
+<div class=3D"MsoNormal" align=3D"center" style=3D"text-align:center">
+<hr size=3D"1" width=3D"98%" align=3D"center">
+</div>
+<div id=3D"x_x_x_divRplyFwdMsg">
+<p class=3D"xxxmsonormal"><b><span style=3D"color:black">From:</span></b><s=
+pan style=3D"color:black"> Neysa Petrina &lt;<a href=3D"mailto:neysa.petrin=
+a@sydney.edu.au">neysa.petrina@sydney.edu.au</a>&gt;<br>
+<b>Sent:</b> Wednesday, September 21, 2022 8:53:30 AM<br>
+<b>To:</b> Simon Poon &lt;<a href=3D"mailto:simon.poon@sydney.edu.au">simon=
+.poon@sydney.edu.au</a>&gt;; Cailin Feldman &lt;<a href=3D"mailto:cfel2589@=
+uni.sydney.edu.au">cfel2589@uni.sydney.edu.au</a>&gt;; Zichen Li &lt;<a hre=
+f=3D"mailto:zili4471@uni.sydney.edu.au">zili4471@uni.sydney.edu.au</a>&gt;;
+ Baoxi Liu &lt;<a href=3D"mailto:bliu3122@uni.sydney.edu.au">bliu3122@uni.s=
+ydney.edu.au</a>&gt;; Jingbang Men &lt;<a href=3D"mailto:jmen0495@uni.sydne=
+y.edu.au">jmen0495@uni.sydney.edu.au</a>&gt;; Bronte Rhiannon Lee &lt;<a hr=
+ef=3D"mailto:blee6992@uni.sydney.edu.au">blee6992@uni.sydney.edu.au</a>&gt;=
+;
+ Kiran Papalkar &lt;<a href=3D"mailto:kpap8603@uni.sydney.edu.au">kpap8603@=
+uni.sydney.edu.au</a>&gt;; Zheyuan Zhang &lt;<a href=3D"mailto:zzha3548@uni=
+.sydney.edu.au">zzha3548@uni.sydney.edu.au</a>&gt;<br>
+<b>Subject:</b> link for meeting today @ 9am</span> <o:p></o:p></p>
+<div>
+<p class=3D"xxxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class=3D"xxxxmsonormal">Morning team,<o:p></o:p></p>
+<p class=3D"xxxxmsonormal">&nbsp;<o:p></o:p></p>
+<p class=3D"xxxxmsonormal">Will our meeting this morning be at the same zoo=
+m link as last week?<o:p></o:p></p>
+<p class=3D"xxxxmsonormal"><span style=3D"font-size:12.0pt;color:black"><a =
+href=3D"https://uni-sydney.zoom.us/j/81571191103">https://uni-sydney.zoom.u=
+s/j/81571191103</a></span><o:p></o:p></p>
+<p class=3D"xxxxmsonormal"><span style=3D"font-size:12.0pt;color:black;back=
+ground:white">&nbsp;</span><o:p></o:p></p>
+<p class=3D"xxxxmsonormal"><span style=3D"font-size:12.0pt;color:black;back=
+ground:white">Thanks,</span><o:p></o:p></p>
+<p class=3D"xxxxmsonormal"><span style=3D"font-size:12.0pt;color:black;back=
+ground:white">&nbsp;</span><o:p></o:p></p>
+<p class=3D"xxxxmsonormal"><span style=3D"font-size:12.0pt;color:black;back=
+ground:white">Neysa</span><o:p></o:p></p>
+<div>
+<div>
+<div>
+<div>
+<div>
+<div>
+<p class=3D"xxxxxxxxmsonormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_SYCPR01MB41754D5A811723DE514D7DBBC02B9SYCPR01MB4175ausp_--
